@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+<nav>
+    <a href="/">Всі користувачі</a>
+</nav>
+<table style="width: 60%;margin-top: 100px; margin: auto" class="table table-striped">
+  <thead>
+    <th>Відправник</th>
+    <th>Отримувач</th>
+    <th>Заголовок</th>
+     <th>Повідомлення</th>
+    <th></th>
+    <th></th>
+  </thead>
+  <tbody th:each="letter: ${letters}">
+<!--    <td th:text="${user.lastName} + ' ' + ${user.firstName.charAt(0)} + '. ' + ${user.patronymic.charAt(0)}"></td>-->
+<!--    <td th:text="${user.getDateOfBirth()}"></td>-->
+    <td th:if="${letter.senderId} == ${userId}" th:text="'Ви'"></td>
+    <td th:if="${letter.senderId} != ${userId}" th:text="${letter.senderId}"></td>
+    <td th:if="${letter.receiverId} == ${userId}" th:text="'Ви'"></td>
+    <td th:if="${letter.receiverId} != ${userId}" th:text="${letter.receiverId}"></td>
+    <td th:text="${letter.topic}"></td>
+    <td style="width: 200px" th:text="${letter.text}"></td>
+    <td> <a th:href="@{/update-letter/{letterId}(letterId=${letter.id})}">Редагувати</a></td>
+    <td> <a th:href="@{/delete-letter/{letterId}/{userId}(letterId=${letter.id},userId=${userId})}">Видалити</a></td>
+
+<!--    <td> <a th:href="@{/all-letters/{userId}(userId=${user.id})}">Всі листи</a></td>-->
+<!--    <td><a th:href="@{/send-letter/{userId}(userId=${user.id})}">Надіслати листа</a></td>-->
+  </tbody>
+</table>
+</body>
+</html>

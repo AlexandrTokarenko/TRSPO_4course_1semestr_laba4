@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+<nav>
+    <a href="/">Всі користувачі</a>
+</nav>
+    <div style="width: 60%;margin-top: 100px; margin: auto">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>ФІО</th>
+            <th>Дата народження</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody th:each="user: ${users}">
+        <tr>
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.lastName} + ' ' + ${user.firstName.charAt(0)} + '. ' + ${user.patronymic.charAt(0)}"></td>
+            <td th:text="${user.getDateOfBirth()}"></td>
+            <td> <a th:href="@{/all-letters/{userId}(userId=${user.id})}">Всі листи</a></td>
+            <td><a th:href="@{/send-letter/{userId}(userId=${user.id})}">Надіслати листа</a></td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+</body>
+</html>

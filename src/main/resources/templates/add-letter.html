@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+<nav>
+  <a href="/">Всі користувачі</a>
+</nav>
+  <form th:action="@{/add-letter/{senderId}(senderId=${senderId})}" style="text-align: center;padding: 40px;" th:object="${letter}" method="post">
+    <label for="receiverId">ID отримувача</label>
+    <input id="receiverId" type="number" th:field="*{receiverId}" name="receiverId">
+
+    <label for="topic">Заголовок листа</label>
+    <input id="topic" type="text" th:field="*{topic}" name="topic">
+
+    <label for="message">Повідомлення</label>
+    <input id="message" type="text" th:field="*{text}" name="message">
+
+    <input type="submit" value="Надіслати">
+  </form>
+</body>
+</html>
