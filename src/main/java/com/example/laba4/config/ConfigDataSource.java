@@ -9,7 +9,6 @@ import javax.sql.DataSource;
 @Configuration
 public class ConfigDataSource {
 
-
     @Bean
     public static DataSource source() {
 

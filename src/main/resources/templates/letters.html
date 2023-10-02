@@ -12,16 +12,18 @@
 </nav>
 <table style="width: 60%;margin-top: 100px; margin: auto" class="table table-striped">
   <thead>
+    <th>ID</th>
     <th>Відправник</th>
     <th>Отримувач</th>
     <th>Заголовок</th>
-     <th>Повідомлення</th>
+    <th>Повідомлення</th>
     <th></th>
     <th></th>
   </thead>
   <tbody th:each="letter: ${letters}">
 <!--    <td th:text="${user.lastName} + ' ' + ${user.firstName.charAt(0)} + '. ' + ${user.patronymic.charAt(0)}"></td>-->
 <!--    <td th:text="${user.getDateOfBirth()}"></td>-->
+    <td th:text="${letter.id}"></td>
     <td th:if="${letter.senderId} == ${userId}" th:text="'Ви'"></td>
     <td th:if="${letter.senderId} != ${userId}" th:text="${letter.senderId}"></td>
     <td th:if="${letter.receiverId} == ${userId}" th:text="'Ви'"></td>
