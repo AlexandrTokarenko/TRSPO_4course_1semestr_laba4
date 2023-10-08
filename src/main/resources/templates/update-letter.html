@@ -11,6 +11,8 @@
     <a href="/">Всі користувачі</a>
 </nav>
 <form th:action="@{/update-letter/{letterId}(letterId=${letter.id})}" style="text-align: center;padding: 40px;" th:object="${letter}" method="post">
+    <input type="hidden" th:field="*{senderId}" />
+
     <label for="receiverId">ID отримувача</label>
     <input id="receiverId" type="number" th:field="*{receiverId}" name="receiverId">
 

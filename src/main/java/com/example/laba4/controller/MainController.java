@@ -2,6 +2,7 @@ package com.example.laba4.controller;
 
 import com.example.laba4.data.Letter;
 import com.example.laba4.data.User;
+import com.example.laba4.service.LetterBeanService;
 import com.example.laba4.service.LetterService;
 import com.example.laba4.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ public class MainController {
 
     private final UserService userService;
     private final LetterService letterService;
+    private final LetterBeanService letterBeanService;
 
     @GetMapping()
     public String index(Model model) {
@@ -41,7 +43,7 @@ public class MainController {
         List<Letter> letters = Stream.concat(sentLetters.stream(), receivedLetters.stream()).toList();
 
         model.addAttribute("userId",userId);
-        model.addAttribute("letters",letters);
+        model.addAttribute("letters",letterBeanService.fromLetter(letters));
         return "letters";
     }
 
@@ -57,11 +59,13 @@ public class MainController {
     @PostMapping("/add-letter/{senderId}")
     public String saveLetter(Model model, @PathVariable int senderId, @ModelAttribute Letter letter) {
 
-        if (userService.findById(letter.getReceiverId()) != null) {
+        if (senderId != letter.getReceiverId()) {
+            if (userService.findById(letter.getReceiverId()) != null) {
 
-            letter.setSenderId(senderId);
+                letter.setSenderId(senderId);
 
-            letterService.save(letter);
+                letterService.save(letter);
+            }
         }
         return "redirect:/all-letters/"+ senderId;
     }
@@ -77,9 +81,11 @@ public class MainController {
     @PostMapping("/update-letter/{letterId}")
     public String updateLetter(@PathVariable int letterId, @ModelAttribute Letter letter) {
 
-        if (userService.findById(letter.getReceiverId()) != null) {
-            letter.setId(letterId);
-            letterService.updateWithoutSenderId(letter);
+        if (letter.getReceiverId() != letter.getSenderId()) {
+            if (userService.findById(letter.getReceiverId()) != null) {
+                letter.setId(letterId);
+                letterService.updateWithoutSenderId(letter);
+            }
         }
         return "redirect:/";
     }

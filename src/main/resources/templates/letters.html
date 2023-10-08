@@ -24,10 +24,10 @@
 <!--    <td th:text="${user.lastName} + ' ' + ${user.firstName.charAt(0)} + '. ' + ${user.patronymic.charAt(0)}"></td>-->
 <!--    <td th:text="${user.getDateOfBirth()}"></td>-->
     <td th:text="${letter.id}"></td>
-    <td th:if="${letter.senderId} == ${userId}" th:text="'Ви'"></td>
-    <td th:if="${letter.senderId} != ${userId}" th:text="${letter.senderId}"></td>
-    <td th:if="${letter.receiverId} == ${userId}" th:text="'Ви'"></td>
-    <td th:if="${letter.receiverId} != ${userId}" th:text="${letter.receiverId}"></td>
+    <td th:if="${letter.sender.id} == ${userId}" th:text="'Ви'"></td>
+    <td th:if="${letter.sender.id} != ${userId}" th:text="${letter.sender.lastName} + ' ' + ${letter.sender.firstName.charAt(0)} + '. ' + ${letter.sender.patronymic.charAt(0)}"></td>
+    <td th:if="${letter.receiver.id} == ${userId}" th:text="'Ви'"></td>
+    <td th:if="${letter.receiver.id} != ${userId}" th:text="${letter.receiver.lastName} + ' ' + ${letter.sender.firstName.charAt(0)} + '. ' + ${letter.receiver.patronymic.charAt(0)}"></td>
     <td th:text="${letter.topic}"></td>
     <td style="width: 200px" th:text="${letter.text}"></td>
     <td> <a th:href="@{/update-letter/{letterId}(letterId=${letter.id})}">Редагувати</a></td>
